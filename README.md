@@ -1,52 +1,111 @@
-# 🥗 NutriSabará – Sistema de Escolha de Refeições Interativo
+# 🥗 NutriSabará – Sistema Interativo de Escolha de Refeições Hospitalares
 
-## 📌 Descrição
+## 📌 Descrição do Projeto
 
-**NutriSabará** é um sistema interativo criado para que **crianças hospitalizadas** escolham suas refeições de maneira divertida, acessível e visual. Desenvolvido em Python com `tkinter`, ele permite que a criança marque suas preferências alimentares por categoria (proteínas, acompanhamentos, sobremesas) e salve suas escolhas para consulta da cozinha hospitalar ou nutricionistas.
+**NutriSabará** é um sistema voltado para hospitais pediátricos, com duas interfaces principais:
+
+1. 👧 **Interface para Crianças**: permite que os pequenos escolham suas refeições de forma lúdica e acessível por meio de uma interface gráfica com categorias, emojis e botões intuitivos.
+
+2. 👨‍🍳 **Interface para a Cozinha**: mostra de forma clara todas as refeições escolhidas pelas crianças, facilitando a organização, o preparo e o controle da alimentação hospitalar.
+
+O projeto visa humanizar o momento das refeições no hospital e tornar a nutrição mais participativa e eficiente.
 
 ---
 
 ## 🎯 Objetivos
 
-- Tornar o momento da refeição mais lúdico e humanizado.
-- Permitir que a criança participe da seleção alimentar.
-- Registrar automaticamente as preferências no formato `.csv`.
-- Otimizar o trabalho da equipe de nutrição.
+- Tornar o processo de seleção de alimentos mais amigável para crianças hospitalizadas.
+- Coletar dados estruturados para a equipe da cozinha e nutricionistas.
+- Otimizar o preparo das refeições com base nas escolhas feitas pelas crianças.
+- Registrar histórico alimentar com data e hora.
 
 ---
 
 ## 🧰 Tecnologias Utilizadas
 
-| Ferramenta | Uso |
-|------------|-----|
+| Ferramenta | Finalidade |
+|------------|------------|
 | Python     | Lógica principal do sistema |
-| Tkinter    | Criação da interface gráfica |
-| CSV        | Armazenamento local dos dados |
-| Datetime   | Registro da data/hora das seleções |
+| Tkinter    | Criação das interfaces gráficas |
+| CSV        | Armazenamento local das escolhas |
+| Datetime   | Registro de data/hora |
 
 ---
 
-## 🖼️ Interface do Sistema
+## 🖼️ Interfaces do Sistema
 
-A interface apresenta três colunas com categorias de alimentos. Cada alimento possui um emoji correspondente e pode ser selecionado via checkbox. Ao final, o botão **"Confirmar Escolhas"** salva os dados em um arquivo `.csv` e exibe uma mensagem de confirmação.
+### 👧 Interface para Crianças
 
----
-
-## ✅ Funcionalidades
-
-- Interface gráfica com categorias:
+- Três categorias com checkboxes:
   - **Proteínas 🍖**
   - **Acompanhamentos 🍚**
   - **Sobremesas 🍓**
-- Checkboxes com emojis para facilitar a escolha.
-- Confirmação visual dos alimentos escolhidos.
-- Opção de remover itens antes de salvar.
-- Salvamento automático no arquivo `refeicoes.csv`.
+- Design com cores vibrantes, emojis e textos grandes.
+- Botão "Confirmar Escolhas" que salva as seleções e pergunta se deseja remover algo antes.
+- Mensagem final exibindo a lista de alimentos escolhidos.
+
+### 👨‍🍳 Interface da Cozinha (Em Desenvolvimento)
+
+- Leitura e visualização do arquivo `refeicoes.csv`.
+- Exibição das escolhas por paciente, com nome, número do quarto, data, hora e lista de alimentos.
+- Permitirá filtrar por quarto ou por data para facilitar o preparo em lotes.
+- Ideal para ser usada em desktop ou tablet na cozinha do hospital.
 
 ---
 
-## 💾 Exemplo de Linha no CSV
+## ✅ Funcionalidades Implementadas
+
+- ✅ Interface interativa com checkboxes por alimento
+- ✅ Registro de escolhas com data e hora
+- ✅ Salvamento automático em `refeicoes.csv`
+- ✅ Confirmação visual e opção de remoção de itens antes do envio
+- 🚧 Interface da cozinha para visualização e filtragem das refeições
+
+---
+
+## 💾 Exemplo de Linha no Arquivo CSV
 
 ```csv
 Paciente,001,2025-04-30,15:42:10,Frango Grelhado 🍗; Arroz 🍚; Pudim 🍮
+
+
+## 📊 Diagrama de Fluxo
+
+graph TD
+A[Início - Interface da Criança] --> B[Seleção de Alimentos]
+B --> C[Botão Confirmar Escolhas]
+C --> D{Selecionou Alimentos?}
+D -- Não --> E[Exibir Alerta]
+D -- Sim --> F{Deseja Remover Algum?}
+F -- Sim --> G[Remover Selecionados]
+F -- Não --> H[Salvar CSV]
+G --> H
+H --> I[Mostrar Confirmação]
+I --> J[Fim]
+
+
+## 🧱 Diagrama de Arquitetura
+
++-----------------------------+
+|   Interface para Criança   |
+| - Tkinter                  |
+| - Checkboxes por categoria|
++------------+----------------
+             |
+             v
++------------+----------------+
+|    Módulo de Processamento |
+| - Validação de seleção     |
+| - Pergunta se deseja editar|
+| - Armazena no CSV          |
++------------+----------------+
+             |
+             v
++-----------------------------+
+|     Interface da Cozinha    |
+| - Leitura do CSV            |
+| - Exibe por paciente/quarto |
+| - Filtros (data, paciente)  |
++-----------------------------+
+
 
