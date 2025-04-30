@@ -44,11 +44,10 @@ O projeto visa humanizar o momento das refeições no hospital e tornar a nutri�
 - Botão "Confirmar Escolhas" que salva as seleções e pergunta se deseja remover algo antes.
 - Mensagem final exibindo a lista de alimentos escolhidos.
 
-### 👨‍🍳 Interface da Cozinha (Em Desenvolvimento)
+### 👨‍🍳 Interface da Cozinha 
 
 - Leitura e visualização do arquivo `refeicoes.csv`.
 - Exibição das escolhas por paciente, com nome, número do quarto, data, hora e lista de alimentos.
-- Permitirá filtrar por quarto ou por data para facilitar o preparo em lotes.
 - Ideal para ser usada em desktop ou tablet na cozinha do hospital.
 
 ---
@@ -59,7 +58,7 @@ O projeto visa humanizar o momento das refeições no hospital e tornar a nutri�
 - ✅ Registro de escolhas com data e hora
 - ✅ Salvamento automático em `refeicoes.csv`
 - ✅ Confirmação visual e opção de remoção de itens antes do envio
-- 🚧 Interface da cozinha para visualização e filtragem das refeições
+- 🚧 Interface da cozinha para visualização e preparação das refeições
 
 ---
 
@@ -67,45 +66,47 @@ O projeto visa humanizar o momento das refeições no hospital e tornar a nutri�
 
 ```csv
 Paciente,001,2025-04-30,15:42:10,Frango Grelhado 🍗; Arroz 🍚; Pudim 🍮
+```
 
+---
 
 ## 📊 Diagrama de Fluxo
 
+```mermaid
 graph TD
-A[Início - Interface da Criança] --> B[Seleção de Alimentos]
-B --> C[Botão Confirmar Escolhas]
-C --> D{Selecionou Alimentos?}
-D -- Não --> E[Exibir Alerta]
-D -- Sim --> F{Deseja Remover Algum?}
-F -- Sim --> G[Remover Selecionados]
-F -- Não --> H[Salvar CSV]
-G --> H
-H --> I[Mostrar Confirmação]
-I --> J[Fim]
+  A[Início - Interface da Criança] --> B[Seleção de Alimentos]
+  B --> C[Botão Confirmar Escolhas]
+  C --> D{Selecionou Alimentos?}
+  D -- Não --> E[Exibir Alerta]
+  D -- Sim --> F{Deseja Remover Algum?}
+  F -- Sim --> G[Remover Selecionados]
+  F -- Não --> H[Salvar CSV]
+  G --> H
+  H --> I[Mostrar Confirmação]
+  I --> J[Exibir na Interface da Cozinha]
+  J --> K[Fim]
 
+```
+---
 
 ## 🧱 Diagrama de Arquitetura
 
-+-----------------------------+
-|   Interface para Criança   |
-| - Tkinter                  |
-| - Checkboxes por categoria|
-+------------+----------------
-             |
-             v
-+------------+----------------+
-|    Módulo de Processamento |
-| - Validação de seleção     |
-| - Pergunta se deseja editar|
-| - Armazena no CSV          |
-+------------+----------------+
-             |
-             v
-+-----------------------------+
-|     Interface da Cozinha    |
-| - Leitura do CSV            |
-| - Exibe por paciente/quarto |
-| - Filtros (data, paciente)  |
-+-----------------------------+
+```mermaid
+graph LR
+    A[Interface para Criança] --> B[Módulo de Processamento]
+    B --> C[Interface da Cozinha]
+    A[Interface para Criança] --> |"Tkinter"| D[Checkboxes por categoria]
+    B --> |"Validação de seleção"| E[Armazena no CSV]
+    C --> |"Leitura do CSV"| F[Exibe por paciente/quarto]
+```
+
+## 📁 Estrutura de Arquivos
+```bash
+nutrisabara/
+├── interface_paciente.py        # Interface da criança
+├── interface_cozinha.py            # Interface da cozinha (em construção)
+├── refeicoes.csv         # Repositório local das escolhas feitas
+└── README.md             # Documentação do projeto
+
 
 
