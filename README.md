@@ -104,9 +104,18 @@ graph LR
 ```bash
 nutrisabara/
 ├── interface_paciente.py        # Interface da criança
-├── interface_cozinha.py            # Interface da cozinha (em construção)
+├── interface_cozinha.py            # Interface da cozinha 
 ├── refeicoes.csv         # Repositório local das escolhas feitas
 └── README.md             # Documentação do projeto
+```
+
+## 👩‍💻 Desenvolvido por
+
+Projeto desenvolvido com foco em acessibilidade infantil e integração hospitalar no contexto de Engenharia de Software.
+Participantes:
+- Giovanni Romano Provazi
+- Vitor de Lima Domingues
+- João Pedro Vieira de Morais
 
 
 
