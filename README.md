@@ -74,15 +74,36 @@ O projeto visa humanizar o momento das refeições no hospital e tornar a nutri�
 
 ```csv
 Paciente,001,2025-04-30,15:42:10,Frango Grelhado 🍗; Arroz 🍚; Pudim 🍮,Lactose
+```
 
 
 ## 📁 Estrutura de Arquivos
 ```bash
 nutrisabara/
-├── interface_paciente.py        # Interface da criança
-├── interface_cozinha.py            # Interface da cozinha 
-├── refeicoes.csv         # Repositório local das escolhas feitas
-└── README.md             # Documentação do projeto
+├── main.py                    # Arquivo principal que executa as duas interfaces em paralelo
+├── refeicao_crianca.py        # Interface da criança
+├── refeicao_cozinha.py       # Interface da cozinha 
+├── refeicoes.csv              # Repositório local das escolhas feitas
+└── README.md                  # Documentação do projeto
+
+```
+
+## 📊 Diagrama de Fluxo
+```mermaid
+graph TD
+  A[Início - Tela de Login] --> B[Entrada de Dados: Nome, Quarto, Alergia]
+  B --> C[Interface para Criança]
+  C --> D[Seleção de Alimentos - checados e bloqueados por alergia]
+  D --> E[Botão Confirmar Escolhas]
+  E --> F{Selecionou Alimentos?}
+  F -- Não --> G[Exibir Alerta]
+  F -- Sim --> H{Deseja Remover Algum?}
+  H -- Sim --> I[Remover Selecionados]
+  H -- Não --> J[Salvar CSV]
+  I --> J
+  J --> K[Mostrar Confirmação]
+  K --> L[Atualizar Interface da Cozinha]
+
 ```
 
 ## 👩‍💻 Desenvolvido por
