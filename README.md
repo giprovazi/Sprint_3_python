@@ -4,7 +4,7 @@
 
 **NutriSabará** é um sistema voltado para hospitais pediátricos, com duas interfaces principais:
 
-1. 👧 **Interface para Crianças**: permite que os pequenos escolham suas refeições de forma lúdica e acessível por meio de uma interface gráfica com categorias, emojis e botões intuitivos.
+1. 👧 **Interface para Crianças**: permite que os pequenos escolham suas refeições de forma lúdica e acessível por meio de uma interface gráfica com categorias, emojis e botões intuitivos. Antes de escolher, o paciente realiza um login onde informa nome, número do quarto e uma alergia alimentar, que é usada para bloquear automaticamente alimentos que contenham ingredientes potencialmente perigosos para aquela criança.
 
 2. 👨‍🍳 **Interface para a Cozinha**: mostra de forma clara todas as refeições escolhidas pelas crianças, facilitando a organização, o preparo e o controle da alimentação hospitalar.
 
@@ -18,6 +18,7 @@ O projeto visa humanizar o momento das refeições no hospital e tornar a nutri�
 - Coletar dados estruturados para a equipe da cozinha e nutricionistas.
 - Otimizar o preparo das refeições com base nas escolhas feitas pelas crianças.
 - Registrar histórico alimentar com data e hora.
+- Garantir segurança alimentar bloqueando alimentos conforme alergias informadas no login.
 
 ---
 
@@ -36,15 +37,20 @@ O projeto visa humanizar o momento das refeições no hospital e tornar a nutri�
 
 ### 👧 Interface para Crianças
 
+- Tela de login para inserir:
+  - Nome do paciente
+  - Número do quarto
+  - Seleção de alergia alimentar (ex: Lactose, Glúten, Amendoim, Frutos do Mar, Nenhuma)
 - Três categorias com checkboxes:
   - **Proteínas 🍖**
   - **Acompanhamentos 🍚**
   - **Sobremesas 🍓**
+- Alimentos que contenham ingredientes alergênicos são bloqueados automaticamente para a alergia selecionada.
 - Design com cores vibrantes, emojis e textos grandes.
-- Botão "Confirmar Escolhas" que salva as seleções e pergunta se deseja remover algo antes.
+- Botão "Confirmar Escolhas" que salva as seleções e pergunta se deseja remover algum item antes de confirmar.
 - Mensagem final exibindo a lista de alimentos escolhidos.
 
-### 👨‍🍳 Interface da Cozinha 
+### 👨‍🍳 Interface da Cozinha
 
 - Leitura e visualização do arquivo `refeicoes.csv`.
 - Exibição das escolhas por paciente, com nome, número do quarto, data, hora e lista de alimentos.
@@ -54,51 +60,21 @@ O projeto visa humanizar o momento das refeições no hospital e tornar a nutri�
 
 ## ✅ Funcionalidades Implementadas
 
+- ✅ Tela de login com captura de nome, quarto e alergia alimentar
+- ✅ Bloqueio automático de alimentos com base na alergia selecionada
 - ✅ Interface interativa com checkboxes por alimento
 - ✅ Registro de escolhas com data e hora
 - ✅ Salvamento automático em `refeicoes.csv`
 - ✅ Confirmação visual e opção de remoção de itens antes do envio
-- 🚧 Interface da cozinha para visualização e preparação das refeições
+- ✅ Interface da cozinha para visualização e preparação das refeições
 
 ---
 
 ## 💾 Exemplo de Linha no Arquivo CSV
 
 ```csv
-Paciente,001,2025-04-30,15:42:10,Frango Grelhado 🍗; Arroz 🍚; Pudim 🍮
-```
+Paciente,001,2025-04-30,15:42:10,Frango Grelhado 🍗; Arroz 🍚; Pudim 🍮,Lactose
 
----
-
-## 📊 Diagrama de Fluxo
-
-```mermaid
-graph TD
-  A[Início - Interface da Criança] --> B[Seleção de Alimentos]
-  B --> C[Botão Confirmar Escolhas]
-  C --> D{Selecionou Alimentos?}
-  D -- Não --> E[Exibir Alerta]
-  D -- Sim --> F{Deseja Remover Algum?}
-  F -- Sim --> G[Remover Selecionados]
-  F -- Não --> H[Salvar CSV]
-  G --> H
-  H --> I[Mostrar Confirmação]
-  I --> J[Exibir na Interface da Cozinha]
-  J --> K[Fim]
-
-```
----
-
-## 🧱 Diagrama de Arquitetura
-
-```mermaid
-graph LR
-    A[Interface para Criança] --> B[Módulo de Processamento]
-    B --> C[Interface da Cozinha]
-    A[Interface para Criança] --> |"Tkinter"| D[Checkboxes por categoria]
-    B --> |"Validação de seleção"| E[Armazena no CSV]
-    C --> |"Leitura do CSV"| F[Exibe por paciente/quarto]
-```
 
 ## 📁 Estrutura de Arquivos
 ```bash
